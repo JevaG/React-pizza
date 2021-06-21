@@ -1,5 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types'
+import PizzaBlock from "./PizzaBlock";
+
 
 
 const Button = ({ onClick,className,outline,children  }) => {
@@ -25,6 +28,11 @@ const Button = ({ onClick,className,outline,children  }) => {
         </button>
 
     )
+}
+
+
+Button.protoTypes = {
+    onClick: PropTypes.func
 }
 
 
