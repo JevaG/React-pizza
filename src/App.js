@@ -33,9 +33,10 @@ function App() {
               {/* Render Props if you want to render/use one component several times ,you can use Route render prop.
                 In other words, how do we pass the list of items down to the Items component so items  can be displayed on the page*/}
 
-            <Route path="/" render={(pizzaItems) =>
-                <Home pizzaItems={pizzas}
-                />} exact
+            <Route path="/" render={
+                (pizzaItems) =>
+                <Home pizzaItems={pizzas} />
+            } exact
             />
             <Route path="/cart" component={Cart} exact />
           </div>
