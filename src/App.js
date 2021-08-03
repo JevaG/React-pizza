@@ -16,7 +16,7 @@ function App() {
                 console.log(data.pizzas);
             })
 
-        // data is axios respondse extracted from the browser .axios has data property
+        // data is axios response extracted from the browser .axios has data property
         // below is fetch (making get request)without axios
         // fetch('http://localhost:3000/db.json')
         //     .then((res) => res.json())

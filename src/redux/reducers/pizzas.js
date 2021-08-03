@@ -4,7 +4,7 @@ const initialState = {
 }
 
 
-const filters = (state = initialState, action) => {
+const pizzas = (state = initialState, action) => {
     if (action.type === 'SET_PIZZAS') {
         return {
             ...state,
@@ -15,4 +15,4 @@ const filters = (state = initialState, action) => {
     return state;
 }
 
-export default filters;
+export default pizzas;

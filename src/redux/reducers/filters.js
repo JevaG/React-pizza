@@ -11,6 +11,7 @@ const filters = (state = initialState, action) => {
             sortBy: action.payload
         };
     }
+
     return state;
 }
 

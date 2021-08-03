@@ -89,6 +89,7 @@ function PizzaBlock({ imageUrl, name, price, types, sizes } ) {
     );
 }
 
+
 PizzaBlock.protoTypes = {
     name: PropTypes.string,
     imageUrl: PropTypes.string,
