@@ -21,9 +21,9 @@ function Home ({ pizzaItems }) {
                     <SortPopup
                         popupItems = {
                             [
-                                'популярности',
-                                'цене',
-                                'алфавиту'
+                                { name: 'популярности', type: 'popular'},
+                                { name:'цене', type: 'price' },
+                                { name: 'алфавиту', type: 'alphabet' }
                             ]
                         }
                     />
