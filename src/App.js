@@ -1,19 +1,24 @@
-import React, { useEffect, useState }from 'react';
+import React, { useEffect } from 'react';
+import  {  useDispatch } from 'react-redux';
 import {  Route } from "react-router-dom";
 import axios from 'axios';
 
 import { Header } from './components';
 import { Home, Cart } from './pages';
+import { setPizzas } from "./redux/actions/pizzasAction";
 
 
 function App() {
-    const [pizzas, setPizzas] = useState([]);
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         axios.get('http://localhost:3000/db.json')
             .then(({ data }) => {
-                setPizzas(data.pizzas);
-                console.log(data.pizzas);
+
+                // dispatch is expecting an object(setPizzas) from pizzaAction
+                dispatch(setPizzas(data.pizzas))
+                // console.log(data.pizzas);
             })
 
         // data is axios response extracted from the browser .axios has data property
@@ -22,9 +27,8 @@ function App() {
         //     .then((res) => res.json())
         //     .then(json => (setPizzas(json.pizzas)) )
 
-    },[])
+    },[dispatch])
 
-    // console.log(pizzas)
     return (
       <div className="wrapper">
         <Header />
@@ -33,11 +37,12 @@ function App() {
               {/* Render Props if you want to render/use one component several times ,you can use Route render prop.
                 In other words, how do we pass the list of items down to the Items component so items  can be displayed on the page*/}
 
-            <Route path="/" render={
-                (pizzaItems) =>
-                <Home pizzaItems={pizzas} />
-            } exact
-            />
+            {/*<Route path="/" render={*/}
+            {/*    (pizzaItems) =>*/}
+            {/*    <Home pizzaItems={pizzaThickness} />*/}
+            {/*} exact*/}
+            {/*/>*/}
+            <Route path="/" component={Home} exact />
             <Route path="/cart" component={Cart} exact />
           </div>
         </div>

@@ -1,31 +1,37 @@
 import React from 'react';
 import { Categories, SortPopup,PizzaBlock } from "../components";
+import {useDispatch, useSelector} from "react-redux";
+import { setCategory } from "../redux/actions/filtersAction";
+
+const categoryNames = [ 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
+const sortItems = [
+    { name: 'популярности', type: 'popular'},
+    { name:'цене', type: 'price' },
+    { name: 'алфавиту', type: 'alphabet' }
+
+]
+
+function Home () {
+    const dispatch = useDispatch();
+
+    const pizzaThickness  = useSelector(({ pizzas }) => pizzas.pizzaThickness);
+
+    // to prevent unnecessary re-rendering of category properties useCallback used. returns the function you execute
+    const onSelectCategory = React.useCallback((index) => {
+        dispatch(setCategory(index));
+
+    }, [dispatch]);
 
 
-function Home ({ pizzaItems }) {
     return (
             <div className="container">
                 <div className="content__top">
                     <Categories
-                        onClickItem={(item) => (console.log(item))}
-                        items={
-                            [
-                                'Мясные',
-                                'Вегетарианская',
-                                'Гриль',
-                                'Острые',
-                                'Закрытые',
-                            ]
-                        }
+                        onClickItem={onSelectCategory}
+                        items={categoryNames}
                     />
                     <SortPopup
-                        popupItems = {
-                            [
-                                { name: 'популярности', type: 'popular'},
-                                { name:'цене', type: 'price' },
-                                { name: 'алфавиту', type: 'alphabet' }
-                            ]
-                        }
+                        popupItems = {sortItems}
                     />
                 </div>
                 <h2 className="content__title">Все пиццы</h2>
@@ -35,8 +41,8 @@ function Home ({ pizzaItems }) {
                      you can just pass one eachPizza down to PizzaBlock.jsx like this eachPizza={eachPizza} and
                      then at that component ,you can extract particular element you need.
                       Another method to do so {...eachPizza}(take all elements from the object of izza arrays)
-                */}
-                    {pizzaItems.map((eachPizza) => (
+                    */}
+                    {pizzaThickness && pizzaThickness.map((eachPizza) => (
                         <PizzaBlock key={eachPizza.id} {...eachPizza} />
                     ))}
                 </div>
