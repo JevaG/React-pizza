@@ -1,5 +1,6 @@
 import React, { useState,useEffect,useRef } from 'react';
 
+// to prevent unnecessary re-rendering of SortPopup nested properties React.memo used.
 const SortPopup = React.memo (
         ({ popupItems }) => {
 

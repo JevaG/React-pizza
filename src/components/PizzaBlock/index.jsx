@@ -1,9 +1,9 @@
 import React,{ useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import LoadingBlock from "./LoadingBlock";
 
-console.log(PropTypes)
-function PizzaBlock({ imageUrl, name, price, types, sizes } ) {
+function PizzaBlock({ imageUrl, name, price, types, sizes,isLoading } ) {
     const pizzaThickness = ['тонкое', 'традиционное'];
     const availablePizzaSizes = [26, 30, 40];
 
@@ -11,9 +11,14 @@ function PizzaBlock({ imageUrl, name, price, types, sizes } ) {
     const [activeSize, setActiveSize] = useState(sizes[0]);
     /* if you want to pass down all the props .
         instead of function PizzaBlock({ name, imageUrl }), you can just pass eachPizza like this
-        funxction PizzaBlock({ eachPizza })
+        function PizzaBlock({ eachPizza })
         another method I used {...eachPizza} at Home.jsx, and then pass ({ name, imageUrl }), src={imageUrl}
     */
+
+    // if(isLoading) {
+    //     return <LoadingBlock />;
+    // }
+
     const onSelectThickness = (index) => {
         setActiveType(index)
     }
@@ -96,12 +101,15 @@ PizzaBlock.protoTypes = {
     price: PropTypes.number,
     types: PropTypes.arrayOf(PropTypes.number).isRequired,
     sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
+
 }
 
 PizzaBlock.defaultProps = {
     name: '---',
     price: 0,
     types: [],
-    sizes: []
+    sizes: [],
+
 }
+
 export default PizzaBlock;
