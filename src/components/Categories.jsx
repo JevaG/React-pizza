@@ -11,9 +11,6 @@ const Categories =  React.memo (
 
         }
 
-        console.log(setActiveItem)
-
-        // console.log(items)
         return (
                 <div className="categories">
                     <ul>

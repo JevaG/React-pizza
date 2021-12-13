@@ -1,7 +1,8 @@
-import React from 'react';
-import { Categories, SortPopup,PizzaBlock } from "../components";
+import React, { useEffect } from 'react';
+import {Categories, SortPopup, PizzaBlock, PizzaLoadingBlock} from "../components";
 import {useDispatch, useSelector} from "react-redux";
 import { setCategory } from "../redux/actions/filtersAction";
+import { fetchPizzas } from "../redux/actions/pizzasAction";
 
 const categoryNames = [ 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 const sortItems = [
@@ -14,7 +15,16 @@ const sortItems = [
 function Home () {
     const dispatch = useDispatch();
 
-    const pizzaThickness  = useSelector(({ pizzas }) => pizzas.pizzaThickness);
+    const  pizzaThickness  = useSelector(({ pizzas }) => pizzas.pizzaThickness);
+    const  isLoading = useSelector(({ pizzas }) => pizzas.isLoading);
+    const { category, sortBy } = useSelector(({ filters }) => filters);
+    console.log(category)   
+
+    useEffect(() => {
+        dispatch(fetchPizzas());
+
+    },[dispatch,category])
+
 
     // to prevent unnecessary re-rendering of category properties useCallback used. returns the function you execute
     const onSelectCategory = React.useCallback((index) => {
@@ -42,9 +52,15 @@ function Home () {
                      then at that component ,you can extract particular element you need.
                       Another method to do so {...eachPizza}(take all elements from the object of izza arrays)
                     */}
-                    {pizzaThickness && pizzaThickness.map((eachPizza) => (
-                        <PizzaBlock key={eachPizza.id} {...eachPizza} />
-                    ))}
+                    {
+                        isLoading
+                            ? pizzaThickness.map((eachPizza) =>
+                                <PizzaBlock key={eachPizza.id} isLoading={true} {...eachPizza} />)
+                            : Array(12)
+                                .fill(0)
+                                .map((_, index) => <PizzaLoadingBlock key={index} />)
+                    }
+
                 </div>
 
             </div>

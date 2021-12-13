@@ -1,33 +1,32 @@
 import React, { useEffect } from 'react';
 import  {  useDispatch } from 'react-redux';
 import {  Route } from "react-router-dom";
-import axios from 'axios';
 
 import { Header } from './components';
 import { Home, Cart } from './pages';
-import { setPizzas } from "./redux/actions/pizzasAction";
 
 
 function App() {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        axios.get('http://localhost:3000/db.json')
-            .then(({ data }) => {
-
-                // dispatch is expecting an object(setPizzas) from pizzaAction
-                dispatch(setPizzas(data.pizzas))
-                // console.log(data.pizzas);
-            })
-
-        // data is axios response extracted from the browser .axios has data property
-        // below is fetch (making get request)without axios
-        // fetch('http://localhost:3000/db.json')
-        //     .then((res) => res.json())
-        //     .then(json => (setPizzas(json.pizzas)) )
-
-    },[dispatch])
+    // useEffect(() => {
+    //     // axios.get('http://localhost:3001/pizzas')
+    //     //     .then(({ data }) => {
+    //     //
+    //     //         // dispatch is expecting an object(setPizzas) from pizzaAction
+    //     //         dispatch(setPizzas(data))
+    //     //         // console.log(data.pizzas);
+    //     //     })
+    //
+    //     // data is axios response extracted from the browser .axios has data property
+    //     // below is fetch (making get request)without axios
+    //     // fetch('http://localhost:3000/db.json')
+    //     //     .then((res) => res.json())
+    //     //     .then(json => (setPizzas(json.pizzas)) )
+    //    dispatch(fetchPizzas());
+    //
+    // },[dispatch])
 
     return (
       <div className="wrapper">
